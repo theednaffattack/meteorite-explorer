@@ -1,0 +1,11 @@
+{
+  "name": "meteorite-explorer-backend",
+  "version": "1.0.0",
+  "description": "A backend server to request meteorite of NASA.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Eddie Naff",
+  "license": "ISC"
+}

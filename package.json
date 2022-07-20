@@ -1,0 +1,16 @@
+{
+	"name": "meteorite-explorer",
+	"version": "1.0.0",
+	"description": "A listing of meteorite strikes",
+	"main": "index.js",
+	"scripts": {
+		"start:client": "pnpm run --prefix frontend start",
+		"start:server": "nodemon ./backend/server/index.js",
+		"dev:start": "concurrently 'pnpm run start:client' 'pnpm run start:server'",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"lint": "eslint --ext .js,.ts ."
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
+}
