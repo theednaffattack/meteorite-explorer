@@ -1,4 +1,5 @@
-import { type Request, type Response, type NextFunction } from "express";
+import { type NextFunction, type Request, type Response } from "express";
+import { asyncWrap } from "./async-wrap";
 
 /**
  * A route controller function to fetch values from Redis
@@ -11,16 +12,24 @@ export async function get(
 	req: Request,
 	res: Response,
 	next: NextFunction,
-	redisClient: any,
+	redisClient: any, // RedisClientType,
 ) {
 	const key = req.query.page;
-	const value = await redisClient.get(key as string);
+	// const value = await redisClient.get(key as string);
+	const [redisValue, redisError] = await asyncWrap(() =>
+		redisClient.get(key as string),
+	);
 
-	// res.status(400).send(error);
+	// Catch any errors here and send them to the client
+	if (redisError) {
+		console.error(redisError);
+		res.status(400).send(redisError);
+	}
+
 	if (typeof key === "string") {
-		if (value !== null) {
+		if (redisValue !== null) {
 			// Once we have the value parse it and send it to the client.
-			res.status(200).send(JSON.parse(value));
+			res.status(200).send(JSON.parse(redisValue as string));
 		} else {
 			next();
 		}
