@@ -1,11 +1,88 @@
 {
-  "name": "meteorite-explorer-backend",
-  "version": "1.0.0",
-  "description": "A backend server to request meteorite of NASA.",
-  "main": "index.js",
-  "scripts": {
-    "test": "test"
-  },
-  "author": "Eddie Naff",
-  "license": "ISC"
+	"name": "meteorite-explorer-backend",
+	"version": "1.0.0",
+	"description": "A backend server to request meteorite of NASA.",
+	"main": "dist/server.js",
+	"scripts": {
+		"dev": "ts-node ./src/server.ts",
+		"test": "test"
+	},
+	"prettier": {
+		"semi": true,
+		"printWidth": 80,
+		"useTabs": true,
+		"singleQuote": false,
+		"arrowParens": "always",
+		"trailingComma": "all"
+	},
+	"eslintConfig": {
+		"env": {
+			"browser": true,
+			"commonjs": true,
+			"es2021": true,
+			"node": true
+		},
+		"parser": "@typescript-eslint/parser",
+		"parserOptions": {
+			"ecmaVersion": 12,
+			"sourceType": "module",
+			"ecmaFeatures": {
+				"jsx": true
+			}
+		},
+		"plugins": [
+			"@typescript-eslint",
+			"react"
+		],
+		"rules": {
+			"react/react-in-jsx-scope": "off",
+			"no-duplicate-imports": "error",
+			"spaced-comment": "error",
+			"@typescript-eslint/no-unused-vars": "error",
+			"@typescript-eslint/consistent-type-definitions": [
+				"error",
+				"type"
+			]
+		},
+		"extends": [
+			"eslint:recommended",
+			"plugin:react/recommended",
+			"plugin:prettier/recommended",
+			"plugin:@typescript-eslint/recommended"
+		]
+	},
+	"eslintIgnore": [
+		"coverage",
+		"dist",
+		"node_modules"
+	],
+	"author": "Eddie Naff",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/cors": "^2.8.12",
+		"@types/debug": "^4.1.7",
+		"@types/default-gateway": "^3.0.1",
+		"@types/express": "^4.17.13",
+		"@typescript-eslint/eslint-plugin": "^5.30.7",
+		"@typescript-eslint/parser": "^5.30.7",
+		"eslint": "^8.20.0",
+		"internal-ip": "^7.0.0",
+		"nodemon": "^2.0.19",
+		"prettier": "^2.7.1",
+		"ts-node": "^10.9.1",
+		"typescript": "^4.7.4",
+		"yup": "^0.32.11"
+	},
+	"dependencies": {
+		"axios": "^0.27.2",
+		"chalk": "^5.0.1",
+		"confres": "^2.0.0",
+		"cors": "^2.8.5",
+		"debug": "^4.3.4",
+		"default-gateway": "^6.0.3",
+		"dotenv": "^16.0.1",
+		"express": "^4.18.1",
+		"ipaddr.js": "^2.0.1",
+		"redis": "^4.2.0"
+	}
 }
