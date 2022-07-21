@@ -1,10 +1,11 @@
 import axios from "axios";
 import { AsyncResolver, CamelCaseKeyMapper, DotEnvLoader } from "confres";
 import cors from "cors";
+import path from "path";
 import debug from "debug";
 import express from "express";
 import { createClient } from "redis";
-import { internalIpV6, internalIpV4 } from "./internal-ip";
+import { internalIpV4 } from "./internal-ip";
 
 // Local imports below
 import { asyncWrap } from "./async-wrap";
@@ -66,8 +67,12 @@ async function main() {
 	server.use(cors());
 	server.use(express.json());
 
+	server.get("/", (req, res) => {
+		res.sendFile(path.join(__dirname, "/index.html"));
+	});
+
 	server.get(
-		"api/jsonData",
+		"/api/jsonData",
 		(req, res, next) => get(req, res, next, redisClient),
 		async (req, res) => {
 			const { data } = await axios.get(
