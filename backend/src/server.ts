@@ -33,14 +33,13 @@ async function main() {
 	//
 	const [configData, configErr] = await asyncWrap(() => resolver.resolve());
 
+	// Guard against bad / unsuccessful config values
 	if (configData === null) throw new Error("Config data is null!");
-
 	if (configErr) generalErrorHandler(configErr);
-
-	console.log("READY CONFIG FN", { data: configData, err: configErr });
 
 	const redisClient = createClient({ url: configData.redisUrl });
 
+	// Add redis events in case we want to log this later
 	redisClient
 		.on("connect", () => {
 			debug("Redis connect");
@@ -67,6 +66,7 @@ async function main() {
 	server.use(cors());
 	server.use(express.json());
 
+	// Add a default route for quick dev manual testing
 	server.get("/", (req, res) => {
 		res.sendFile(path.join(__dirname, "/index.html"));
 	});
