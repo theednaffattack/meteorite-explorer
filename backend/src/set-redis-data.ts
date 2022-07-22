@@ -4,6 +4,6 @@
  * @param value
  * */
 
-export async function set(key: string, value: any, redisClient: any) {
+export async function setRedisData(key: string, value: any, redisClient: any) {
 	return await redisClient.set(key, JSON.stringify(value));
 }

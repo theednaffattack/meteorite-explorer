@@ -8,7 +8,7 @@ import { asyncWrap } from "./async-wrap";
  * @param next
  */
 
-export async function get(
+export async function getRedisData(
 	req: Request,
 	res: Response,
 	next: NextFunction,
