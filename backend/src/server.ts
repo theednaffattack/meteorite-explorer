@@ -10,8 +10,8 @@ import { internalIpV4 } from "./internal-ip";
 // Local imports below
 import { asyncWrap } from "./async-wrap";
 import { generalErrorHandler } from "./general-error-handler";
-import { get } from "./get";
-import { set } from "./set";
+import { getRedisData } from "./get-redis-data";
+import { setRedisData } from "./set-redis-data";
 
 type ConfigVars = {
 	meteoriteUrl: string;
@@ -73,15 +73,15 @@ async function main() {
 
 	server.get(
 		"/api/jsonData",
-		(req, res, next) => get(req, res, next, redisClient),
+		(req, res, next) => getRedisData(req, res, next, redisClient),
 		async (req, res) => {
-			const { data } = await axios.get(
+			const { data: nasaData } = await axios.get(
 				`${configData.meteoriteUrl}?offset=${req.query.page}&$limit=20`,
 			);
 			// ParsedQs can be string or string[] or undefined
 			// so test if the variable is of type "string"
-			if (typeof req.query.page === "string") {
-				set(req.query.page, data, redisClient);
+			if (nasaData && typeof req.query.page === "string") {
+				setRedisData(req.query.page, nasaData, redisClient);
 			}
 		},
 	);
