@@ -4,7 +4,16 @@
 	"description": "A backend server to request meteorite of NASA.",
 	"main": "dist/server.js",
 	"scripts": {
-		"dev": "ts-node ./src/server.ts",
+		"build": "tsc",
+		"dev-server": "ts-node ./src/server.ts",
+		"postbuild": "ts-node ./scripts/post-build.ts",
+		"redis-container-id": "docker ps -aqf 'name=^redis-meteor-db$'",
+		"redis-start": "docker run -p 6379:6379 --name redis-meteor-db redis",
+		"rm-build": "pnpm rimraf dist",
+		"spinup": "docker-compose -f docker-compose-redis-local.yml up -d",
+		"spindown": "docker-compose -f docker-compose-redis-local.yml down",
+		"start": "node dist/server.js",
+		"start-local": "pnpm rm-build && pnpm build && pnpm postbuild && pnpm spinup && pnpm start",
 		"test": "test"
 	},
 	"prettier": {
@@ -84,6 +93,7 @@
 		"default-gateway": "^6.0.3",
 		"dotenv": "^16.0.1",
 		"express": "^4.18.1",
+		"fs-extra": "^10.1.0",
 		"ipaddr.js": "^2.0.1",
 		"redis": "^4.2.0"
 	}
