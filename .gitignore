@@ -28,3 +28,6 @@ yarn-debug.log*
 yarn-error.log*
 /frontend/node_modules
 .env
+
+# dokku scripts
+backend/scripts/configure-Dokku-redis.sh
