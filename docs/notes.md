@@ -1,3 +1,3 @@
 # Notes
 
-https://cryogenicplanet.tech/posts/typescript-monorepo
+- [PNPM monorepos] (https://cryogenicplanet.tech/posts/typescript-monorepo)
