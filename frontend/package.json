@@ -4,7 +4,11 @@
 	"description": "A frontend application to view meteorite data from NASA.",
 	"main": "index.js",
 	"scripts": {
-		"test": "test"
+		"test": "test",
+		"dev": "astro dev --host",
+		"start": "astro dev --host",
+		"build": "astro build",
+		"preview": "astro preview --host"
 	},
 	"prettier": {
 		"semi": true,
@@ -58,10 +62,13 @@
 	"author": "Eddie Naff",
 	"license": "ISC",
 	"devDependencies": {
-		"@typescript-eslint/eslint-plugin": "^5.30.7",
-		"@typescript-eslint/parser": "^5.30.7",
-		"eslint": "^8.20.0",
-		"prettier": "^2.7.1",
-		"typescript": "^4.7.4"
+		"@astrojs/react": "^0.4.2",
+		"@types/react": "^18.0.10",
+		"@types/react-dom": "^18.0.5",
+		"astro": "^1.0.0-rc.3"
+	},
+	"dependencies": {
+		"react": "^18.1.0",
+		"react-dom": "^18.1.0"
 	}
 }
