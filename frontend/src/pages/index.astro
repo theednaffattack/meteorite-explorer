@@ -1,0 +1,39 @@
+---
+// Component Imports
+import Counter from "../components/counter.jsx";
+import MeteorTable from "../components/meteor-table.jsx";
+const someProps = {
+	count: 0,
+};
+
+// Full Astro Component Syntax:
+// https://docs.astro.build/core-concepts/astro-components/
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<style>
+      * {
+        box-sizing: border-box;
+      }
+      
+			html,
+			body {
+				font-family: system-ui;
+				margin: 0;
+        padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<Counter {...someProps} client:visible>
+				<h1>Hello, React!</h1>
+			</Counter>
+			<MeteorTable  client:visible  />
+		</main>
+	</body>
+</html>
