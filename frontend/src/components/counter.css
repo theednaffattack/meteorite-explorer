@@ -4,10 +4,8 @@
 	grid-template-columns: repeat(3, minmax(0, 1fr));
 	margin-top: 2em;
 	place-items: center;
-	border: 2px dashed green;
 }
 
 .counter-message {
 	text-align: center;
-	border: 2px dashed green;
 }
