@@ -2,6 +2,7 @@
 // Component Imports
 import Counter from "../components/counter.jsx";
 import MeteorTable from "../components/meteor-table.jsx";
+import Grid from "../components/grid.jsx";
 const someProps = {
 	count: 0,
 };
@@ -30,10 +31,8 @@ const someProps = {
 	</head>
 	<body>
 		<main>
-			<Counter {...someProps} client:visible>
-				<h1>Hello, React!</h1>
-			</Counter>
-			<MeteorTable  client:visible  />
+      
+      <Grid  client:visible />
 		</main>
 	</body>
 </html>

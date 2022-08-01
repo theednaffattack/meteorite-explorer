@@ -1,8 +1,13 @@
+.table-wrap {
+	overflow: hidden;
+}
+
 table {
 	display: grid;
 	border-collapse: collapse;
-	min-width: 100%;
-	border: 2px dashed green;
+	/* min-width: 100%; */
+	overflow-x: scroll;
+
 	grid-template-columns:
 		minmax(150px, 1fr)
 		minmax(150px, 1.67fr)
@@ -51,4 +56,29 @@ td {
 
 tr:nth-child(even) td {
 	background: #f8f6ff;
+}
+
+.search-form {
+	display: flex;
+}
+
+.search-form input {
+	padding: 10px;
+}
+
+.input-wrap {
+	display: flex;
+
+	position: relative;
+}
+
+.previous-search {
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	right: 0;
+	top: 40px;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
 }
