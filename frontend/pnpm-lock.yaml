@@ -6,17 +6,17 @@ specifiers:
   '@types/react': ^18.0.10
   '@types/react-dom': ^18.0.5
   astro: ^1.0.0-rc.3
+  fuse.js: ^6.6.2
   react: ^18.1.0
   react-dom: ^18.1.0
   react-hook-form: ^7.34.0
-  react-icons: ^4.4.0
 
 dependencies:
   '@a7sc11u/scramble': 0.0.6_react-dom@18.2.0+react@18.2.0
+  fuse.js: 6.6.2
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.34.0_react@18.2.0
-  react-icons: 4.4.0_react@18.2.0
 
 devDependencies:
   '@astrojs/react': 0.4.2_react-dom@18.2.0+react@18.2.0
@@ -1423,6 +1423,11 @@ packages:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
     dev: true
 
+  /fuse.js/6.6.2:
+    resolution: {integrity: sha512-cJaJkxCCxC8qIIcPBF9yGxY0W/tVZS3uEISDxhYIdtk8OL93pe+6Zj7LjCqVV4dzbqcriOZ+kQ/NE4RXZHsIGA==}
+    engines: {node: '>=10'}
+    dev: false
+
   /gensync/1.0.0-beta.2:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
     engines: {node: '>=6.9.0'}
@@ -2742,14 +2747,6 @@ packages:
     engines: {node: '>=12.22.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
-    dependencies:
-      react: 18.2.0
-    dev: false
-
-  /react-icons/4.4.0_react@18.2.0:
-    resolution: {integrity: sha512-fSbvHeVYo/B5/L4VhB7sBA1i2tS8MkT0Hb9t2H1AVPkwGfVHLJCqyr2Py9dKMxsyM63Eng1GkdZfbWj+Fmv8Rg==}
-    peerDependencies:
-      react: '*'
     dependencies:
       react: 18.2.0
     dev: false
