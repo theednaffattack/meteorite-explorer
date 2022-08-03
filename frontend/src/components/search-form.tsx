@@ -1,7 +1,19 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-export function SearchForm() {
+export function SearchForm({
+	disabled,
+	offset,
+	limit,
+}: {
+	disabled: boolean;
+	offset: number;
+	limit: number;
+}) {
+	const theName = "";
+	const whereClause = `&$where=name="${theName}"`;
+	const searchUri = `https://data.nasa.gov/resource/gh4g-9sfh.json?$offset=${offset}&$limit=${limit}`;
+
 	const { register, handleSubmit, getValues } = useForm();
 
 	const [previousSearchTerms, setPreviousSearchTerms] = useState([]);
@@ -52,6 +64,7 @@ export function SearchForm() {
 					<input
 						type="text"
 						name="search"
+						disabled={disabled}
 						{...register("search")}
 						// onChange={handleChange}
 						onFocus={handleFocus}

@@ -1,24 +1,11 @@
 import { useEffect, useState } from "react";
-import { TextScramble } from "@a7sc11u/scramble";
+import { LoadingRows } from "./loading-rows";
 
 import "./meteor-table.css";
-import { TableNavigation } from "./table-naviagion";
+import { Scramble } from "./scramble";
 import { SearchForm } from "./search-form";
-
-function Scramble({ text }) {
-	return (
-		<TextScramble
-			play={true}
-			speed={1}
-			scramble={8}
-			step={1}
-			stepInterval={1}
-			seed={3}
-			seedInterval={10}
-			text={text}
-		/>
-	);
-}
+import { SiteHeader } from "./site-header";
+import { TableNavigation } from "./table-naviagion";
 
 export default function MeteorTable({
 	apiLimit,
@@ -28,6 +15,7 @@ export default function MeteorTable({
 	setLimit,
 }) {
 	const [data, setData] = useState(null);
+
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
@@ -46,12 +34,14 @@ export default function MeteorTable({
 		},
 	};
 
-	const nasaApi = `https://data.nasa.gov/resource/gh4g-9sfh.json?$offset=${dataApi.pagination.offset}&$limit=${dataApi.pagination.limit}`;
-	const nasaApiNoLimit = `https://data.nasa.gov/resource/gh4g-9sfh.json?$offset=${dataApi.pagination.offset}`;
-	// const nasaApiPage = `https://data.nasa.gov/resource/gh4g-9sfh.json?$page=${page}`;
+	const apiUriNoLimit = `https://data.nasa.gov/resource/gh4g-9sfh.json?$offset=${dataApi.pagination.offset}`;
 
+	const apiUri = `https://data.nasa.gov/resource/gh4g-9sfh.json?$offset=${dataApi.pagination.offset}&$limit=${dataApi.pagination.limit}`;
+	const devApi = `${import.meta.env.PUBLIC_DEV_API_URI}?$offset=${
+		dataApi.pagination.offset
+	}&$limit=${dataApi.pagination.limit}`;
 	useEffect(() => {
-		fetch(nasaApi)
+		fetch(devApi)
 			.then((response) => {
 				if (!response.ok) {
 					throw new Error(
@@ -72,80 +62,98 @@ export default function MeteorTable({
 				setLoading(false);
 			});
 	}, [offset, limit]);
-	const displayingFrom = data && data.length ? offset : "";
-	const displayingTo = data && data.length ? offset + data.length : "";
+
+	const errorRows = Array.from(Array(20)).map((_, errorRowIndex) => (
+		<tr className="table-row" key={`${errorRowIndex}`}>
+			<td className="error-cell">No data. Error!</td>
+		</tr>
+	));
+
+	const numberOfColumns = 9;
+
+	// const loadingRows = Array.from(Array(limit)).map((_, errorRowIndex) => (
+	// 	<tr className="table-row" key={`${errorRowIndex}`}>
+	// 		{loadingCells}
+	// 	</tr>
+	// ));
+
 	return (
-		<div className="table-wrap">
-			<p>
-				DISPLAYING: {displayingFrom} - {displayingTo}
-			</p>
-			<SearchForm />
-			<TableNavigation
-				apiLimit={apiLimit}
-				data={data}
-				limit={limit}
-				offset={offset}
-				setOffset={setOffset}
-			/>
+		<div>
+			<div className="table-wrap">
+				<SiteHeader />
+				<SearchForm disabled={loading} limit={limit} offset={offset} />
+				<TableNavigation
+					apiLimit={apiLimit}
+					data={data}
+					disabled={loading}
+					limit={limit}
+					offset={offset}
+					setOffset={setOffset}
+				/>
 
-			<table className="table">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>ID</th>
-						<th>Name Type</th>
-						<th>Rec Class</th>
-						<th>Mass (g)</th>
-						<th>Fall</th>
-						<th>Year</th>
-						<th>Latitude</th>
-						<th>Longitude</th>
-					</tr>
-				</thead>
-
-				<tbody>
-					{loading && (
+				<table className="table">
+					<thead>
 						<tr>
-							<td>A moment please...</td>
+							<th>Name</th>
+							<th>ID</th>
+							<th>Name Type</th>
+							<th>Rec Class</th>
+							<th>Mass (g)</th>
+							<th>Fall</th>
+							<th>Year</th>
+							<th>Latitude</th>
+							<th>Longitude</th>
 						</tr>
-					)}
-					{error && (
-						<tr>
-							<td>{`There is a problem fetching the post data - ${error}`}</td>
-						</tr>
-					)}
+					</thead>
 
-					{data &&
-						data.map(
-							({
-								id,
-								name,
-								mass,
-								nametype,
-								recclass,
-								reclat,
-								reclong,
-								fall,
-								year,
-							}) => {
-								const realYear = year ? year.substring(0, 4) : "0000";
-								return (
-									<tr key={id}>
-										<td>{name ? <Scramble text={name} /> : ""}</td>
-										<td>{id ? <Scramble text={id} /> : ""}</td>
-										<td>{id ? <Scramble text={nametype} /> : ""}</td>
-										<td>{recclass ? <Scramble text={recclass} /> : ""}</td>
-										<td>{mass ? <Scramble text={mass} /> : ""}</td>
-										<td>{fall ? <Scramble text={fall} /> : ""}</td>
-										<td>{realYear ? <Scramble text={realYear} /> : ""}</td>
-										<td>{reclat ? <Scramble text={reclat} /> : ""}</td>
-										<td>{reclong ? <Scramble text={reclong} /> : ""}</td>
-									</tr>
-								);
-							},
+					<tbody>
+						{loading && (
+							<LoadingRows numberOfColumns={9} numberOfRows={limit} />
 						)}
-				</tbody>
-			</table>
+						{!loading && error && errorRows}
+
+						{data &&
+							data.map(
+								({
+									id,
+									name,
+									mass,
+									nametype,
+									recclass,
+									reclat,
+									reclong,
+									fall,
+									year,
+								}) => {
+									const realYear = year ? year.substring(0, 4) : "0000";
+
+									return (
+										<tr className="table-row" key={`row-${id}`}>
+											<td>{name ? <Scramble text={name} /> : ""}</td>
+											<td>{id ? <Scramble text={id} /> : ""}</td>
+											<td>{id ? <Scramble text={nametype} /> : ""}</td>
+											<td>{recclass ? <Scramble text={recclass} /> : ""}</td>
+											<td>{mass ? <Scramble text={mass} /> : ""}</td>
+											<td>{fall ? <Scramble text={fall} /> : ""}</td>
+											<td>{realYear ? <Scramble text={realYear} /> : ""}</td>
+											<td>{reclat ? <Scramble text={reclat} /> : ""}</td>
+											<td>{reclong ? <Scramble text={reclong} /> : ""}</td>
+										</tr>
+									);
+								},
+							)}
+					</tbody>
+				</table>
+
+				<TableNavigation
+					apiLimit={apiLimit}
+					disabled={loading}
+					data={data}
+					limit={limit}
+					offset={offset}
+					setOffset={setOffset}
+				/>
+			</div>
 		</div>
 	);
 }

@@ -2,10 +2,12 @@ import "./dynamic-page-buttons.css";
 
 export function DynamicPageButtons({
 	apiLimit,
+	disabled,
 	offset,
 	limit,
 }: {
 	apiLimit: number;
+	disabled: boolean;
 	offset: number;
 	limit: number;
 }) {
@@ -62,6 +64,7 @@ export function DynamicPageButtons({
 		return (
 			<button
 				className={buttonText[buttonIndex] === "..." ? "no-tooltip" : "tooltip"}
+				disabled={disabled}
 				type="button"
 				key={`page-${buttonIndex}`}
 				style={{
@@ -70,7 +73,9 @@ export function DynamicPageButtons({
 			>
 				{buttonText[buttonIndex]}
 
-				<span className="tooltiptext">{buttonText[buttonIndex]}</span>
+				<span className="tooltiptext">
+					{offset} - {offset + limit}
+				</span>
 			</button>
 		);
 	});

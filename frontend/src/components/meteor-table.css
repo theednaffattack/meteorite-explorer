@@ -1,5 +1,6 @@
 .table-wrap {
 	overflow: hidden;
+	position: relative;
 }
 
 table {
@@ -81,4 +82,8 @@ tr:nth-child(even) td {
 	background-color: white;
 	display: flex;
 	flex-direction: column;
+}
+
+.error-cell {
+	grid-column: 1 / 9;
 }
