@@ -18,6 +18,8 @@ specifiers:
   eslint: ^8.20.0
   express: ^4.18.1
   fs-extra: ^10.1.0
+  fse: ^4.0.1
+  geonames.js: ^3.0.6
   internal-ip: ^7.0.0
   ipaddr.js: ^2.0.1
   nodemon: ^2.0.19
@@ -38,6 +40,8 @@ dependencies:
   dotenv: 16.0.1
   express: 4.18.1
   fs-extra: 10.1.0
+  fse: 4.0.1
+  geonames.js: 3.0.6_debug@4.3.4
   ipaddr.js: 2.0.1
   redis: 4.2.0
 
@@ -498,6 +502,14 @@ packages:
 
   /asynckit/0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
+    dev: false
+
+  /axios/0.21.4_debug@4.3.4:
+    resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
+    dependencies:
+      follow-redirects: 1.15.1_debug@4.3.4
+    transitivePeerDependencies:
+      - debug
     dev: false
 
   /axios/0.27.2_debug@4.3.4:
@@ -1061,6 +1073,11 @@ packages:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
     dev: true
 
+  /fse/4.0.1:
+    resolution: {integrity: sha512-5XLUrweQvJxSJKhBe3XjimHSJ2EUhYOG+K2tLQy8I9kp78Fa3CgUXqxAZWxE9+fsvnI5GVkHl4NDqbf1tSb93Q==}
+    engines: {node: '>=4.0.0'}
+    dev: false
+
   /fsevents/2.3.2:
     resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -1080,6 +1097,15 @@ packages:
   /generic-pool/3.8.2:
     resolution: {integrity: sha512-nGToKy6p3PAbYQ7p1UlWl6vSPwfwU6TMSWK7TTu+WUY4ZjyZQGniGGt2oNVvyNSpyZYSB43zMXVLcBm08MTMkg==}
     engines: {node: '>= 4'}
+    dev: false
+
+  /geonames.js/3.0.6_debug@4.3.4:
+    resolution: {integrity: sha512-iDnDEzknKB7RXunjwYNgWg8ZbxjJhO9ChauXjo3njcsqhpHp3rpssqJLhATEp6T6NIybWlT/V3i6dxw+kFcICA==}
+    dependencies:
+      axios: 0.21.4_debug@4.3.4
+      qs: 6.10.3
+    transitivePeerDependencies:
+      - debug
     dev: false
 
   /get-intrinsic/1.1.2:
