@@ -17,7 +17,8 @@
 		"test": "test",
 		"fetch-meteors": "ts-node ./src/data-manipulation.ts/call-fetch-meteorite-dataset.ts",
 		"flush-meteors": "ts-node ./src/data-manipulation/call-flush-meteor-records.ts",
-		"seed-meteors": "ts-node ./src/data-manipulation/call-seed-meteor-data.ts"
+		"seed-meteors": "ts-node ./src/data-manipulation/call-seed-meteor-data.ts",
+		"create-search-vals": "ts-node ./src/data-manipulation/call-create-search-values.ts"
 	},
 	"prettier": {
 		"semi": true,
