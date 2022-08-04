@@ -67,6 +67,28 @@ tr:nth-child(even) td {
 	padding: 10px;
 }
 
+.search-results-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.previous-searches-header {
+	margin: 0;
+	padding: 0;
+	font-size: small;
+}
+
+.previous-searches-header-wrap {
+	padding-left: 4px;
+	padding-right: 4px;
+	background-color: lightgrey;
+}
+
+.selected {
+	background-color: orange;
+}
+
 .input-wrap {
 	display: flex;
 

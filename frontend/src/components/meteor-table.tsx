@@ -81,7 +81,12 @@ export default function MeteorTable({
 		<div>
 			<div className="table-wrap">
 				<SiteHeader />
-				<SearchForm disabled={loading} limit={limit} offset={offset} />
+				<SearchForm
+					disabled={loading}
+					limit={limit}
+					offset={offset}
+					setData={setData}
+				/>
 				<TableNavigation
 					apiLimit={apiLimit}
 					data={data}
