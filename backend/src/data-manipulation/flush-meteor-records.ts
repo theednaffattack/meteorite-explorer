@@ -17,5 +17,5 @@ export async function flushMeteorRecords() {
 	const [, connectError] = await asyncWrap(() => redisClient.connect());
 	const [data, error] = await asyncWrap(() => redisClient.flushDb());
 
-	console.log("WHAT IS THIS", { data });
+	redisClient.quit();
 }
